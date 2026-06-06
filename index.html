@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO -->
+  <title>Spextract — Spectrum Digitiser & Data Extraction App for iPhone, iPad & Mac</title>
+  <meta name="description" content="Spextract: iPhone, iPad and Mac app for extracting numerical data from printed, photographed, or scanned spectra of any type. Perspective correction, axis calibration, and CSV export. Works entirely offline. One-time purchase.">
+  <meta name="keywords" content="spectrum digitiser, spectrum data extraction, spectral data from image, digitise spectrum, extract spectrum data, printed spectrum to CSV, spectrum photograph to data, UV-Vis digitiser, IR spectrum digitiser, NMR spectrum digitiser, Raman spectrum digitiser, spectroscopy data extraction, perspective correction spectrum, axis calibration spectrum, spectrum image to CSV, iOS spectroscopy app, iPhone spectrum app, iPad spectrum analysis, analytical chemistry app, spectrum tracing tool">
+  <meta name="author" content="Matthew Swan BSc RSci MRSC">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mpdswan.github.io/spextract-support/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mpdswan.github.io/spextract-support/">
+  <meta property="og:title" content="Spextract — Spectrum Digitiser & Data Extraction App for iPhone & iPad">
+  <meta property="og:description" content="Extract numerical data from any printed or photographed spectrum. Perspective correction, multi-point axis calibration, and CSV export. Works with UV-Vis, IR, Raman, NMR, and more. iPhone, iPad & Mac.">
+  <meta property="og:image" content="https://mpdswan.github.io/spextract-support/screenshots/spextract-main.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Spextract — Spectrum Digitiser App for iPhone & iPad">
+  <meta name="twitter:description" content="Photograph any printed spectrum, correct perspective, calibrate axes, and export the digital trace as CSV. Works with UV-Vis, IR, Raman, NMR, and more. iPhone, iPad & Mac.">
+  <meta name="twitter:image" content="https://mpdswan.github.io/spextract-support/screenshots/spextract-main.png">
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Spextract",
+    "alternateName": ["Spectrum Extractor", "Spextract App", "Spectrum Digitiser"],
+    "operatingSystem": "iOS, iPadOS, macOS",
+    "applicationCategory": "EducationalApplication",
+    "applicationSubCategory": "Spectroscopy Data Extraction",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "GBP"
+    },
+    "description": "Spextract lets you extract numerical data from any printed, photographed, or scanned spectrum — UV-Vis, IR, Raman, NMR, chromatography, and more. Features perspective correction to handle angled photographs, multi-point axis calibration for non-linear axes, automatic trace extraction, and CSV export. Works entirely offline — no data is ever transmitted.",
+    "featureList": [
+      "Spectrum digitisation from photos and scanned images",
+      "Perspective correction for angled photographs",
+      "Multi-point X and Y axis calibration",
+      "Automatic trace extraction",
+      "Manual trace correction tools",
+      "CSV and TSV data export",
+      "Works with any spectrum type: UV-Vis, IR, Raman, NMR, fluorescence, chromatography",
+      "Completely offline — no data collected"
+    ],
+    "author": {
+      "@type": "Person",
+      "name": "Matthew Swan",
+      "honorificSuffix": "BSc RSci MRSC"
+    },
+    "inLanguage": "en",
+    "isAccessibleForFree": false
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #161b22;
+      --surface2: #21262d;
+      --border: #30363d;
+      --accent: #3b82f6;
+      --accent2: #00c8aa;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --heading: #f0f6fc;
+      --danger: #ef4444;
+      --success: #22c55e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(13,17,23,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 24px; height: 56px; }
+    nav .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    nav .logo img { height: 28px; width: auto; }
+    nav .logo-text { font-weight: 700; font-size: 1rem; color: var(--heading); white-space: nowrap; }
+    nav .logo-text span { color: var(--accent); }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.15s; }
+    nav a:hover { color: var(--text); }
+    nav .spacer { flex: 1; }
+
+    /* HERO */
+    .hero { text-align: center; padding: 80px 24px 60px; max-width: 720px; margin: 0 auto; }
+    .hero .hero-logo { margin: 0 auto 28px; display: block; max-width: 480px; width: 90%; height: auto; }
+    .hero .badge { display: inline-block; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.35); color: var(--accent); border-radius: 999px; padding: 4px 14px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; color: var(--heading); line-height: 1.2; margin-bottom: 16px; }
+    .hero p { font-size: 1.05rem; color: var(--muted); max-width: 560px; margin: 0 auto 32px; }
+
+    /* SCREENSHOTS */
+    .screenshot-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 24px 60px; max-width: 1100px; margin: 0 auto; }
+    .screenshot-slot { border-radius: 16px; overflow: hidden; background: var(--surface); border: 1px solid var(--border); min-height: 240px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; }
+    .screenshot-slot img { width: 100%; height: auto; display: block; }
+    .screenshot-slot .placeholder-label { color: var(--muted); font-size: 0.8rem; text-align: center; padding: 40px 20px; }
+    .screenshot-slot .placeholder-label .placeholder-icon { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+    @media (max-width: 680px) { .screenshot-row { grid-template-columns: 1fr; } }
+
+    /* SECTION COMMON */
+    section { max-width: 860px; margin: 0 auto; padding: 60px 24px; }
+    section + section { border-top: 1px solid var(--border); }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; }
+    h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; color: var(--heading); margin-bottom: 16px; }
+    p { color: var(--muted); margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* MODES GRID */
+    .modes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 24px; }
+    .mode-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+    .mode-card .icon { font-size: 2rem; margin-bottom: 10px; }
+    .mode-card h3 { font-size: 1rem; font-weight: 700; color: var(--heading); margin-bottom: 6px; }
+    .mode-card p { font-size: 0.85rem; margin: 0; }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+    .step { display: flex; gap: 16px; align-items: flex-start; }
+    .step-num { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; }
+    .step-body h4 { font-size: 0.95rem; font-weight: 700; color: var(--heading); margin-bottom: 4px; }
+    .step-body p { font-size: 0.85rem; margin: 0; }
+
+    /* COMPATIBILITY */
+    .compat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 24px; }
+    .compat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .compat-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--heading); margin-bottom: 6px; }
+    .compat-card p { font-size: 0.8rem; margin: 0; color: var(--muted); }
+    .format-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .format-pill { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.3); color: var(--accent); border-radius: 999px; padding: 3px 12px; font-size: 0.78rem; font-weight: 600; }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+    details { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    details[open] { border-color: var(--accent); }
+    summary { padding: 16px 20px; font-weight: 600; font-size: 0.9rem; color: var(--heading); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 1.2rem; color: var(--muted); transition: transform 0.2s; }
+    details[open] summary::after { content: "−"; }
+    .faq-answer { padding: 0 20px 16px; font-size: 0.875rem; color: var(--muted); }
+    .faq-answer p { margin-bottom: 8px; }
+    .faq-answer p:last-child { margin: 0; }
+    .faq-answer ul { padding-left: 18px; }
+    .faq-answer li { margin-bottom: 4px; }
+
+    /* CONTACT */
+    .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+    .contact-card a { color: var(--accent); text-decoration: none; }
+    .contact-card a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); text-align: center; padding: 32px 24px; color: var(--muted); font-size: 0.8rem; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+    footer .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 12px; flex-wrap: wrap; }
+
+    @media (max-width: 600px) {
+      nav a { display: none; }
+      nav a.always { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <img src="img/dark.png" alt="Spextract logo">
+  </a>
+  <div class="spacer"></div>
+  <a href="#how-it-works">How it works</a>
+  <a href="#compatibility">Compatibility</a>
+  <a href="#faq">FAQ</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="#contact" class="always">Contact</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="img/dark.png" alt="Spextract" class="hero-logo">
+  <div class="badge">Support &amp; Documentation</div>
+  <p>Extract numerical data from any printed, photographed, or scanned spectrum — UV-Vis, IR, Raman, fluorescence, chromatography, and more. On your iPhone, iPad, or Mac.</p>
+  <p style="font-size:0.85rem; color:var(--muted); margin-bottom: 28px; letter-spacing: 0.01em;">One-time purchase.&nbsp; No subscription.&nbsp; No data collected.&nbsp; No catch.</p>
+  <!-- App Store badge placeholder — replace href and src when app is live -->
+  <p style="font-size:0.8rem; color:var(--muted);">Coming soon to the App Store.</p>
+</div>
+
+<!-- SCREENSHOTS -->
+<div class="screenshot-row">
+  <div class="screenshot-slot">
+    <span class="placeholder-label">
+      <span class="placeholder-icon">📸</span>
+      Screenshot coming soon
+    </span>
+  </div>
+  <div class="screenshot-slot">
+    <span class="placeholder-label">
+      <span class="placeholder-icon">📐</span>
+      Screenshot coming soon
+    </span>
+  </div>
+  <div class="screenshot-slot">
+    <span class="placeholder-label">
+      <span class="placeholder-icon">📊</span>
+      Screenshot coming soon
+    </span>
+  </div>
+  <div class="screenshot-slot">
+    <span class="placeholder-label">
+      <span class="placeholder-icon">💾</span>
+      Screenshot coming soon
+    </span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-label">Overview</div>
+  <h2>Turn any spectrum image into usable data</h2>
+  <p>Spextract is a spectrum digitisation tool built for scientists, students, and researchers who need to extract numerical data from printed, photocopied, or published spectra. Whether you're working from a textbook, a journal article, a lab printout, or an old instrument report, Spextract converts the visual trace into a clean, downloadable dataset — without needing to rescan the original or contact the instrument manufacturer.</p>
+  <p>It works with virtually any spectrum type: UV-Vis absorbance, infrared transmittance, Raman scattering, fluorescence emission, NMR, chromatograms, and more. If it has two axes and a continuous trace, Spextract can digitise it.</p>
+
+  <div class="modes-grid">
+    <div class="mode-card">
+      <div class="icon">📸</div>
+      <h3>Photograph &amp; Import</h3>
+      <p>Take a photo directly in the app or import from your library. Spextract handles images taken at an angle — no need for a perfectly flat, overhead shot.</p>
+    </div>
+    <div class="mode-card">
+      <div class="icon">📐</div>
+      <h3>Correct &amp; Calibrate</h3>
+      <p>Drag corner handles to remove perspective distortion, then tap known axis values to calibrate both X and Y. Multi-point calibration handles compressed or non-linear scales.</p>
+    </div>
+    <div class="mode-card">
+      <div class="icon">📊</div>
+      <h3>Extract &amp; Export</h3>
+      <p>The app traces the spectrum automatically. Review the result, make manual corrections if needed, then export as CSV or TSV for use in Excel, Python, Origin, or any other tool.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WALKTHROUGH -->
+<section>
+  <div class="section-label">Step-by-step guide</div>
+  <h2>Digitising a spectrum from start to finish</h2>
+  <p>The entire workflow from photograph to exported data typically takes under two minutes for a clean printed spectrum.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4>Import a spectrum image</h4>
+        <p>Tap <strong>Import</strong> to choose an image from your photo library, or tap <strong>Camera</strong> to photograph a printed or photocopied spectrum directly. Photographs taken at an angle are fine — perspective correction handles the rest.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4>Correct perspective</h4>
+        <p>Drag the four coloured corner handles to align with the corners of the spectrum plot area. This removes any keystoning or tilt from the photograph, ensuring that axis calibration and trace extraction are geometrically accurate.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4>Calibrate the X axis</h4>
+        <p>Tap two or more known positions along the horizontal axis and enter their values (e.g. wavelength in nm, wavenumber in cm⁻¹, ppm, or time in minutes). More calibration points improve accuracy for compressed or non-linear axes.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h4>Calibrate the Y axis</h4>
+        <p>Tap the top and bottom of the vertical scale and enter the corresponding values — absorbance units, % transmittance, intensity counts, or whatever units the original spectrum uses.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h4>Extract the trace</h4>
+        <p>Tap <strong>Extract</strong> to run automatic trace detection. Spextract identifies the spectrum line and converts it to a series of (X, Y) data points mapped to your calibrated axes. Review the overlay to confirm accuracy.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h4>Correct and export</h4>
+        <p>Use the manual correction tools to adjust any sections the automatic extraction missed or misread — for instance, very faint traces or regions with heavy grid lines. When satisfied, tap <strong>Export CSV</strong> or <strong>Export TSV</strong> to save the data to Files or share it directly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPATIBILITY -->
+<section id="compatibility">
+  <div class="section-label">Compatibility</div>
+  <h2>Works with any spectrum type</h2>
+  <p>Spextract is technique-agnostic. As long as a spectrum has two calibratable axes and a visible trace, the app can extract it. Below are common use cases, but the list is far from exhaustive.</p>
+
+  <div class="compat-grid">
+    <div class="compat-card">
+      <h4>UV-Vis</h4>
+      <p>Absorbance or transmittance vs. wavelength (nm). Works with single-beam and double-beam instrument printouts.</p>
+    </div>
+    <div class="compat-card">
+      <h4>Infrared (IR / FTIR)</h4>
+      <p>Transmittance or absorbance vs. wavenumber (cm⁻¹). Handles both mid-IR and near-IR ranges.</p>
+    </div>
+    <div class="compat-card">
+      <h4>Raman</h4>
+      <p>Raman shift (cm⁻¹) vs. intensity. Works with dispersive and FT-Raman instrument outputs.</p>
+    </div>
+    <div class="compat-card">
+      <h4>Fluorescence</h4>
+      <p>Emission or excitation spectra. Intensity vs. wavelength from any fluorescence spectrometer printout.</p>
+    </div>
+    <div class="compat-card">
+      <h4>NMR</h4>
+      <p>Chemical shift (ppm) vs. intensity. Useful for extracting data from published NMR spectra in papers or textbooks.</p>
+    </div>
+    <div class="compat-card">
+      <h4>Chromatography</h4>
+      <p>Time or volume vs. detector response (UV, RI, FID). Digitise HPLC, GC, or SEC chromatograms from printed reports.</p>
+    </div>
+    <div class="compat-card">
+      <h4>Any X-Y trace</h4>
+      <p>If it has a continuous line on two axes, Spextract can extract it — DSC, TGA, XRD, rheology, and more.</p>
+    </div>
+  </div>
+
+  <p style="margin-top: 20px;">Export formats:</p>
+  <div class="format-pills">
+    <span class="format-pill">CSV (.csv)</span>
+    <span class="format-pill">TSV (.tsv)</span>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">Frequently Asked Questions</div>
+  <h2>FAQ</h2>
+  <div class="faq-list">
+
+    <details>
+      <summary>What types of spectrum images work best?</summary>
+      <div class="faq-answer">
+        <p>Spextract works best with images that have a clearly visible, continuous trace on a contrasting background. Ideal sources include:</p>
+        <ul>
+          <li>Printed instrument reports photographed in good lighting</li>
+          <li>Photocopied spectra (even low-quality photocopies often work)</li>
+          <li>Screenshots or scanned images from journal PDFs or textbooks</li>
+          <li>Direct photographs of instrument screens</li>
+        </ul>
+        <p>The perspective correction tool handles angled shots, so you don't need to position your camera perfectly above the page.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How accurate is the extracted data?</summary>
+      <div class="faq-answer">
+        <p>Accuracy depends on the quality of the source image and the number of calibration points you provide. For a clean, high-contrast printed spectrum with four or more calibration points per axis, accuracy is typically within 1–2 data units — sufficient for most literature comparisons and teaching purposes.</p>
+        <p>For highest accuracy: use a flat, well-lit photograph (or a scanned image), provide calibration points spread across the full axis range, and use the manual correction tools to fix any mis-traced regions.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I digitise a spectrum with a non-linear axis?</summary>
+      <div class="faq-answer">
+        <p>Yes. Multi-point calibration handles compressed, expanded, or otherwise non-linear axis scales. Tap additional calibration points in the regions where the scale changes most — Spextract interpolates between them to map pixel positions to axis values accurately.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What if the automatic trace extraction misses part of the spectrum?</summary>
+      <div class="faq-answer">
+        <p>Use the manual correction tools to draw over any sections that were missed or incorrectly traced. Common causes of extraction errors include grid lines that overlap the trace, very faint or broken lines, and regions where two traces cross (e.g. on a difference spectrum). Manual correction lets you fix these precisely.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I digitise a spectrum with multiple traces on the same plot?</summary>
+      <div class="faq-answer">
+        <p>Yes. After extracting the first trace, you can select a different trace colour or region and run extraction again to obtain a second dataset. Each trace is exported separately.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What can I do with the exported CSV data?</summary>
+      <div class="faq-answer">
+        <p>The exported file contains two columns — one for each axis — which can be opened directly in:</p>
+        <ul>
+          <li><strong>Microsoft Excel or Numbers</strong> — for plotting and basic analysis</li>
+          <li><strong>Python (pandas, matplotlib, scipy)</strong> — for scripted analysis and peak fitting</li>
+          <li><strong>OriginPro or Igor Pro</strong> — for advanced spectroscopy analysis</li>
+          <li><strong>Swano's FTIR Interpretation Assistant</strong> — to assign peaks in digitised IR spectra</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Does the app work offline?</summary>
+      <div class="faq-answer">
+        <p>Yes, completely. All image processing, trace extraction, and calibration happens on-device. An internet connection is never required, and no data is ever sent anywhere. See the <a href="privacy.html">Privacy Policy</a> for full details.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What image formats are supported for import?</summary>
+      <div class="faq-answer">
+        <p>Spextract accepts any image format supported by iOS and macOS, including JPEG, PNG, HEIC, TIFF, and PDF page exports. You can also import directly from your Files app, Photos library, or a connected scanner.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in touch</div>
+  <h2>Contact &amp; Support</h2>
+  <p>If you have a question that isn't answered here, have found a bug, or want to suggest a feature, get in touch by email. I aim to respond within two business days.</p>
+  <div class="contact-card">
+    <div>
+      <strong style="color: var(--heading);">Email</strong><br>
+      <a href="mailto:Spextract@outlook.com">Spextract@outlook.com</a>
+    </div>
+    <div style="font-size:0.85rem; color: var(--muted);">
+      When reporting a bug, it helps to include: the iOS/macOS version, a brief description of what you were doing when the issue occurred, and (if possible) the image file you were working with.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="#compatibility">Compatibility</a>
+    <a href="#faq">FAQ</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="#contact">Contact</a>
+    <a href="sitemap.xml">Sitemap</a>
+  </div>
+  <p>© 2026 Matthew Swan. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
